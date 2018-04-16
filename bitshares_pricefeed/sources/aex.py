@@ -15,7 +15,11 @@ class Aex(FeedSource):
                 for quote in self.quotes:
                     if base == quote:
                         continue
-                    params = {'c': quote.lower(), 'mk_type': base.lower()}
+                    if base == 'CNY':
+                        params = {'c': quote.lower(), 'mk_type':"bitcny"}
+                    else:
+                        params = {'c': quote.lower(), 'mk_type': base.lower()}
+                    print("respuesta:", params)
                     response = requests.get(url=url, params=params, headers=_request_headers, timeout=self.timeout)
                     result = response.json()
                     if "ticker" in result and \
