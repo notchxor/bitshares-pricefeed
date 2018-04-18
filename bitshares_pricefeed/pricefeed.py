@@ -3,14 +3,14 @@ import numpy as num
 import time
 import requests
 from pprint import pprint
-from math import fabs, sqrt
+from math import fabs, sqrt, sin, pi
 from bitshares.account import Account
 from bitshares.asset import Asset
 from bitshares.price import Price
 from bitshares.amount import Amount
 from bitshares.market import Market
 from concurrent import futures
-from datetime import datetime, date, timedelta, timezone
+from datetime import datetime, date, timedelta, timezone, MINYEAR
 from . import sources
 import logging
 log = logging.getLogger(__name__)
@@ -98,7 +98,7 @@ class Feed(object):
             self.price_result[symbol]["flags"].append("skip_change")
 
         # Feed too old
-        feed_age = self.price_result[symbol]["current_feed"]["date"] if self.price_result[symbol]["current_feed"] else datetime.min
+        feed_age = self.price_result[symbol]["current_feed"]["date"] if self.price_result[symbol]["current_feed"] else datetime(MINYEAR, 1, 1, tzinfo=timezone.utc)
         if (datetime.now(timezone.utc) - feed_age).total_seconds() > self.assetconf(symbol, "maxage"):
             self.price_result[symbol]["flags"].append("over_max_age")
 
