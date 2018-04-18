@@ -12,14 +12,15 @@ class Aex(FeedSource):
         try:
             for base in self.bases:
                 feed[base] = {}
+                if hasattr(self, "baseAlias") and base in self.baseAlias:
+                    basefetch=self.baseAlias[base]
+                else:
+                    basefetch=base
                 for quote in self.quotes:
                     if base == quote:
                         continue
-                    if base == 'CNY':
-                        params = {'c': quote.lower(), 'mk_type':"bitcny"}
-                    else:
-                        params = {'c': quote.lower(), 'mk_type': base.lower()}
-                    print("respuesta:", params)
+
+                    params = {'c': quote.lower(), 'mk_type': basefetch.lower()}
                     response = requests.get(url=url, params=params, headers=_request_headers, timeout=self.timeout)
                     result = response.json()
                     if "ticker" in result and \

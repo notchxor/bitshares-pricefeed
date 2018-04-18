@@ -12,11 +12,15 @@ class Zb(FeedSource):
         try:
             for base in self.bases:
                 feed[base] = {}
+                if hasattr(self, "baseAlias") and base in self.baseAlias:
+                    basefetch=self.baseAlias[base]
+                else:
+                    basefetch=base
                 for quote in self.quotes:
-                    if base == quote:
+                    if basefetch == quote:
                         continue
                     response = requests.get(
-                        url=url.format(base=base, quote=quote),
+                        url=url.format(base=basefetch, quote=quote),
                         headers=_request_headers,
                         timeout=self.timeout)
                     result = response.json()
