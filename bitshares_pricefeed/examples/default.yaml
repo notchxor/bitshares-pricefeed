@@ -250,6 +250,9 @@ exchanges:
             - BTS
         bases:
             - BTC
+            - CNY
+        baseAlias:
+          CNY: BITCNY
     lbank:
         klass: Lbank
         enable: True
