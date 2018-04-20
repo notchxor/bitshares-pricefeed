@@ -26,7 +26,6 @@ class Gate(FeedSource):
                     result = response.json()
                     if hasattr(self, "quoteNames") and quote in self.quoteNames:
                             quote = self.quoteNames[quote]
-                    print(result)
                     feed[base][quote] = {"price": (float(result["last"])), "volume": (float(result["quoteVolume"])* self.scaleVolumeBy)}
 
         except Exception as e:
