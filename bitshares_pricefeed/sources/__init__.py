@@ -27,3 +27,4 @@ from .aex import Aex
 from .zb import Zb
 from .lbank import Lbank
 from .binance import Binance
+from .gate import Gate

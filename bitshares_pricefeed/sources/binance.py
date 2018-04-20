@@ -31,4 +31,3 @@ class Binance(FeedSource):
         except Exception as e:
             raise Exception("\nError fetching results from {1}! ({0})".format(str(e), type(self).__name__))
         return feed
-
