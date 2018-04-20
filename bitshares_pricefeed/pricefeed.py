@@ -457,12 +457,12 @@ class Feed(object):
 
         self.price_result[symbol] = {
             "price": float(price.as_quote(backing_symbol)),
-            "cer": cer,
+            "cer": float(cer),
             "number": 1,
             "short_backing_symbol": backing_symbol,
-            "mean": price,
-            "median": price,
-            "weighted": price,
+            "mean": float(price),
+            "median": float(price),
+            "weighted": float(price),
             "mssr": self.assetconf(symbol, "maximum_short_squeeze_ratio"),
             "mcr": self.assetconf(symbol, "maintenance_collateral_ratio"),
             "std": 0.0,
